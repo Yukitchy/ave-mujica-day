@@ -1,20 +1,25 @@
 <!doctype html><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;800;900&family=Inter:wght@600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1200px;height:630px;overflow:hidden;font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif}
-.c{width:1200px;height:630px;padding:70px 80px;display:flex;flex-direction:column;justify-content:center;
- background:repeating-linear-gradient(90deg,rgba(0,0,0,.10) 0 3px,transparent 3px 120px),linear-gradient(180deg,#3B2E56 0%,#2B2140 52%,#171029 100%);color:#FBF7F0}
-.l{width:190px;height:11px;border-radius:4px;background:#F7E9BE;box-shadow:0 0 34px 14px rgba(247,233,190,.65),0 0 120px 54px rgba(200,169,81,.3);margin-bottom:46px}
-.e{font-size:22px;font-weight:700;letter-spacing:.3em;color:#C8A951;margin-bottom:20px}
-h1{font-size:82px;font-weight:800;line-height:1.22;letter-spacing:-.01em;text-shadow:0 3px 22px rgba(0,0,0,.4)}
-.d{margin-top:38px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.chip{background:#C8A951;color:#241C33;font-size:26px;font-weight:900;letter-spacing:.08em;padding:11px 28px;border-radius:999px}
-.s{font-size:26px;font-weight:700;color:#D8CEE8}
+body{width:1200px;height:630px;overflow:hidden;font-family:Inter,"Zen Kaku Gothic New",sans-serif;background:#111}
+.c{position:relative;width:1200px;height:630px;overflow:hidden}
+.g{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr)}
+.g img{width:100%;height:100%;object-fit:cover;display:block}
+.c:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 28%,rgba(0,0,0,.82))}
+.t{position:absolute;inset:auto 0 0 0;z-index:2;padding:0 64px 54px;color:#fff}
+.k{font-size:22px;font-weight:600;letter-spacing:.14em;color:#9ee3b8;margin-bottom:16px}
+h1{font-size:70px;font-weight:800;line-height:1.14;letter-spacing:-.025em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.s{margin-top:18px;font-size:25px;font-weight:600;letter-spacing:.1em;color:#e6e0d4}
 </style>
-<div class="c">
-  <div class="l"></div>
-  <div class="e">SHINAGAWA / KAWASAKI / YOKOHAMA</div>
-  <h1>Ave Mujica<br>観る日の3コース</h1>
-  <div class="d"><span class="chip">2026.10.23 FRI 午前の回</span><span class="s">劇場とランチをセットで3案</span></div>
-</div>
+<div class="c"><div class="g" id="g"></div>
+ <div class="t"><div class="k">FRI, OCT 23 · 10:00</div>
+ <h1>Ave Mujica を観て、<br>そのままランチ。</h1>
+ <div class="s">SHINAGAWA · KAWASAKI · YOKOHAMA</div></div></div>
+<script>
+fetch('photos.json').then(r=>r.json()).then(p=>{
+  ['cinema_shinagawa','citta_plaza','skybldg'].forEach(k=>{
+    var i=document.createElement('img'); i.src=p[k].thumb; document.getElementById('g').appendChild(i);
+  });
+});
+</script>
