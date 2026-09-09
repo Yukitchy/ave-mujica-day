@@ -215,7 +215,13 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .tail{{padding:30px 0 60px;border-top:1px solid var(--line);margin-top:36px}}
 .tail p{{font-size:15px;color:var(--mute);max-width:640px;margin:0 0 10px}}
 .tail b{{color:var(--ink)}}
-.cred{{font-size:11px;color:#a49d90;margin-top:20px;line-height:1.6}}
+.cred{{margin:26px 0 60px;border-top:1px solid var(--line);padding-top:14px}}
+.cred summary{{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--mute);cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;padding:4px 0}}
+.cred summary::-webkit-details-marker{{display:none}}
+.cred summary::after{{content:"▾";font-size:11px}}
+.cred[open] summary::after{{content:"▴"}}
+.cred summary:hover{{color:var(--ink)}}
+.cred p{{font-size:11px;color:#a49d90;line-height:1.7;margin:8px 0 0;max-width:820px}}
 @media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
 </style></head><body>
 <header class="hero"><div class="hpic"><div class="slides">{slides}</div>
@@ -257,8 +263,14 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 <p><b>品川・川崎・横浜のどれか</b>を返してください。店は当日その場で決めても大丈夫です。</p>
 <p>10/23の上映時刻は、どの劇場もまだ出していません。だいたい1週間前、<b>10月17日ごろ</b>に出るので、出たらユウキが10時台の回を押さえて、時刻と座席をあらためて連絡します。</p>
 <p>営業時間と定休日は変わることがあるので、当日の朝にリンクから確認します。</p>
-<p class="cred">10/23（金）10:00〜13:00は「いつなら？」で確定した枠です。店の写真は料理のイメージです。<br>作品のビジュアルとあらすじは劇場版 Ave Mujica 公式サイトより。<br>エリアと料理の写真は Wikimedia Commons（CC BY / CC BY-SA / CC0）: {credits}</p>
 </div>
+
+<details class="cred">
+<summary>このページについて</summary>
+<p>10/23（金）10:00〜13:00は「いつなら？」で確定した枠です。店の写真は料理のイメージです。</p>
+<p>作品のビジュアルとあらすじは劇場版 Ave Mujica 公式サイトより。</p>
+<p>エリアと料理の写真は Wikimedia Commons（CC BY / CC BY-SA / CC0）: {credits}</p>
+</details>
 </div>
 
 <script>
