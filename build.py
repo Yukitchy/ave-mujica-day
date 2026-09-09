@@ -200,11 +200,12 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .pre>img{{width:100%;border-radius:10px;display:block;background:#f0ebe0}}
 .pre p{{font-size:17px;color:var(--mute);margin:0 0 16px;max-width:620px}}
 .pre p b{{color:var(--ink);font-weight:600}}
-.watch{{list-style:none;padding:0;margin:0 0 22px;border-top:1px solid var(--line)}}
-.watch li{{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}}
-.watch b{{color:var(--acc);font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}}
-.watch strong{{display:block;font-weight:600;font-size:16px}} .watch span{{display:block;color:var(--mute);font-size:14px}}
-.watch a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
+.vid{{position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden;background:#000;margin:0 0 22px}}
+.vid iframe{{position:absolute;inset:0;width:100%;height:100%;border:0}}
+.pre h3{{margin-top:22px}}
+.syn{{margin:0 0 18px;padding:16px 20px;background:var(--bg);border-left:3px solid var(--acc);border-radius:0 8px 8px 0;font-size:16px;color:var(--ink);line-height:1.75}}
+.syn cite{{display:block;font-style:normal;font-size:12px;color:var(--mute);margin-top:8px;letter-spacing:.04em}}
+.pre p b{{color:var(--ink);font-weight:600}}
 .cast{{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 20px}}
 .cast td{{padding:9px 0;border-bottom:1px solid var(--line)}}
 .cast tr:last-child td{{border-bottom:none}}
@@ -231,13 +232,11 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 <img src="img/img_kv_01.webp" alt="劇場版 Ave Mujica のティザービジュアル" loading="lazy">
 <div>
 <p><b>劇場版「BanG Dream! Ave Mujica prima aurora」</b>。バンドリの世界のガールズバンド Ave Mujica の物語で、全編が新しく作られた新作です。10月16日（金）公開で、観るのはその翌週の金曜。</p>
-<p>あらすじは公式のものをそのまま置きます。「Ave Mujicaの再デビューから半年以上が過ぎ、季節は春。バンドはさらに人気を博し、メンバーそれぞれの活動も軌道に乗っていた。次なる舞台として祥子が打ち出したのは、会員制のマスカレード。神になると誓った彼女の思惑とは……」</p>
-<h3>観ておくと入りやすいもの</h3>
-<ol class="watch">
-<li><b>1</b><div><strong>劇場版の上映告知PV</strong><span>1分ほど。まずこれを観れば雰囲気が分かります。<a href="https://www.youtube.com/watch?v=QyzUM0Aoz3k" target="_blank" rel="noopener">YouTubeで見る ↗</a></span></div></li>
-<li><b>2</b><div><strong>TVアニメ「BanG Dream! Ave Mujica」全13話</strong><span>2025年1月から3月に放送されたシリーズ。劇場版はこの続きなので、時間があるならこれが本命です。<a href="https://www.youtube.com/watch?v=4okQqU25lcs" target="_blank" rel="noopener">本PVを見る ↗</a></span></div></li>
-<li><b>3</b><div><strong>TVアニメ「BanG Dream! It&#39;s MyGO!!!!!」</strong><span>Ave Mujica の1つ前の話。人物の関係はここから始まっているので、余裕があれば。</span></div></li>
-</ol>
+<blockquote class="syn">Ave Mujicaの再デビューから半年以上が過ぎ、季節は春。バンドはさらに人気を博し、メンバーそれぞれの活動も軌道に乗っていた。次なる舞台として祥子が打ち出したのは、会員制のマスカレード。神になると誓った彼女の思惑とは……<cite>公式サイトのイントロダクション</cite></blockquote>
+<h3>予告（公式・バンドリちゃんねる☆）</h3>
+<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/Uqt2rXUA-r8" title="映画「BanG Dream! Ave Mujica prima aurora」2026年10月16日 公開" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>
+<h3>軽くおさらい</h3>
+<p style="font-size:15px">TVシリーズは、一度バラバラになった Ave Mujica が最後に5人で戻ってくるところで終わりました。劇場版はその<b>続き</b>で、時間は半年ぶん飛びます。TVシリーズを観ていれば、そのまま入って大丈夫です。</p>
 <h3>バンドの5人</h3>
 <table class="cast">
 <tr><td>豊川 祥子</td><td>オブリビオニス</td><td>高尾 奏音</td></tr>
