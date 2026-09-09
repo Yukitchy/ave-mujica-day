@@ -100,8 +100,8 @@ def detail(c):
 <a class="choose" href="{gm(c['place'])}" target="_blank" rel="noopener">Googleマップで{html.escape(c['place'])}を開く</a>
 </div></section>'''
 
-KV = [('img/img_kv_02.webp', '劇場版 Ave Mujica prima aurora キービジュアル', 'center 30%'),
-      ('img/img_kv_01.webp', '劇場版 Ave Mujica ティザービジュアル', 'center 44%'),
+KV = [('img/img_kv_02.webp', '劇場版 Ave Mujica prima aurora キービジュアル', 'center 35%'),
+      ('img/img_kv_01.webp', '劇場版 Ave Mujica ティザービジュアル', 'center 63%'),
       ('img/movieintro.webp', '劇場版 Ave Mujica の場面写真', 'center center')]
 slides = ''.join(f'<img src="{u}" alt="{html.escape(a)}" style="object-position:{pos}">' for u, a, pos in KV)
 dots = ''.join('<button type="button" aria-label="ビジュアル' + str(i + 1) + '"></button>' for i in range(len(KV)))
