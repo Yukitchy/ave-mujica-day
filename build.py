@@ -100,8 +100,11 @@ def detail(c):
 <a class="choose" href="{gm(c['place'])}" target="_blank" rel="noopener">Googleマップで{html.escape(c['place'])}を開く</a>
 </div></section>'''
 
-slides = ''.join(f'<img src="{c["card"]}" alt="{html.escape(c["place"])}" data-course="{c["id"]}" data-name="{html.escape(c["kicker"])} · {html.escape(c["name"])}">' for c in COURSES)
-dots = ''.join(f'<button type="button" aria-label="{c["id"]}"></button>' for c in COURSES)
+KV = [('img/img_kv_02.webp', '劇場版 Ave Mujica prima aurora キービジュアル', 'center 30%'),
+      ('img/img_kv_01.webp', '劇場版 Ave Mujica ティザービジュアル', 'center 44%'),
+      ('img/movieintro.webp', '劇場版 Ave Mujica の場面写真', 'center center')]
+slides = ''.join(f'<img src="{u}" alt="{html.escape(a)}" style="object-position:{pos}">' for u, a, pos in KV)
+dots = ''.join('<button type="button" aria-label="ビジュアル' + str(i + 1) + '"></button>' for i in range(len(KV)))
 credits = ' / '.join(sorted(set(html.escape(v['title'].rsplit('.', 1)[0]) for v in PH.values())))
 
 page = f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -134,7 +137,7 @@ h3{{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase
 .hcap h1{{color:#fff;margin:0 0 14px;text-shadow:0 2px 14px rgba(0,0,0,.3)}}
 .esub{{margin:0 0 16px;font-size:14px;font-weight:600;letter-spacing:.12em;color:#e6e0d4}}
 .snav{{display:flex;align-items:center;gap:10px}}
-.slabel{{font:inherit;font-size:12.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 13px;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.slabel{{font:inherit;font-size:12.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 13px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 .dots{{display:flex;gap:7px;margin-left:auto;flex:none}}
 .dots button{{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}}
 .dots button.on{{background:#fff}}
@@ -193,42 +196,78 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .notes{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px}} .notes p{{margin:0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-radius:8px}} .notes b{{display:block;font-weight:600;margin-bottom:3px}}
 .links{{margin:0 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}} .links a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
 .choose{{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:16px 32px;border-radius:8px;font-size:16px;letter-spacing:-.01em;margin-bottom:28px}} .choose:hover{{background:#333}}
+.pre{{display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px;align-items:start;padding-bottom:8px}}
+.pre>img{{width:100%;border-radius:10px;display:block;background:#f0ebe0}}
+.pre p{{font-size:17px;color:var(--mute);margin:0 0 16px;max-width:620px}}
+.pre p b{{color:var(--ink);font-weight:600}}
+.watch{{list-style:none;padding:0;margin:0 0 22px;border-top:1px solid var(--line)}}
+.watch li{{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}}
+.watch b{{color:var(--acc);font-weight:600;font-size:14px;font-variant-numeric:tabular-nums}}
+.watch strong{{display:block;font-weight:600;font-size:16px}} .watch span{{display:block;color:var(--mute);font-size:14px}}
+.watch a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
+.cast{{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 20px}}
+.cast td{{padding:9px 0;border-bottom:1px solid var(--line)}}
+.cast tr:last-child td{{border-bottom:none}}
+.cast td:first-child{{font-weight:600;white-space:nowrap;padding-right:14px}}
+.cast td:nth-child(2){{color:var(--acc);font-size:12px;font-weight:600;letter-spacing:.06em;white-space:nowrap;padding-right:14px}}
+.cast td:last-child{{color:var(--mute);text-align:right}}
 .tail{{padding:30px 0 60px;border-top:1px solid var(--line);margin-top:36px}}
 .tail p{{font-size:15px;color:var(--mute);max-width:640px;margin:0 0 10px}}
 .tail b{{color:var(--ink)}}
 .cred{{font-size:11px;color:#a49d90;margin-top:20px;line-height:1.6}}
-@media(max-width:860px){{ .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
+@media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
 </style></head><body>
 <header class="hero"><div class="hpic"><div class="slides">{slides}</div>
 <div class="wrap hcap"><p class="kicker">FRI, OCT 23 · 10:00</p>
 <h1><span class="nb">Ave Mujica を観て、</span><span class="nb">そのままランチ。</span></h1>
 <p class="esub">SHINAGAWA · KAWASAKI · YOKOHAMA</p>
-<div class="snav"><button class="slabel" type="button"></button><div class="dots">{dots}</div></div></div></div>
+<div class="snav"><span class="slabel">劇場版 BanG Dream! Ave Mujica prima aurora</span><div class="dots">{dots}</div></div></div></div>
 <div class="wrap hbody"><p>10/23（金）の午前の回で観ます。劇場と、観たあとに歩いて行ける店をセットにして3案作りました。行きたいエリアを1つ選んでください。</p>
 <ul class="facts"><li><b>日にち</b> 10/23（金）</li><li><b>集合</b> 10時台（回が出たら確定）</li><li><b>人数</b> 2人</li><li><b>作品</b> 劇場版 Ave Mujica prima aurora</li></ul></div></header>
 
 <div class="wrap">
-<div class="sechead"><span class="n">1</span><div><b>コースは3択</b> <span>カードを押すと、当日の流れ・地図・店が出ます。</span></div></div>
+<div class="sechead"><span class="n">1</span><div><b>どんな映画か</b> <span>観る前に、これだけ。</span></div></div>
+<div class="pre">
+<img src="img/img_kv_01.webp" alt="劇場版 Ave Mujica のティザービジュアル" loading="lazy">
+<div>
+<p><b>劇場版「BanG Dream! Ave Mujica prima aurora」</b>。バンドリの世界のガールズバンド Ave Mujica の物語で、全編が新しく作られた新作です。10月16日（金）公開で、観るのはその翌週の金曜。</p>
+<p>あらすじは公式のものをそのまま置きます。「Ave Mujicaの再デビューから半年以上が過ぎ、季節は春。バンドはさらに人気を博し、メンバーそれぞれの活動も軌道に乗っていた。次なる舞台として祥子が打ち出したのは、会員制のマスカレード。神になると誓った彼女の思惑とは……」</p>
+<h3>観ておくと入りやすいもの</h3>
+<ol class="watch">
+<li><b>1</b><div><strong>劇場版の上映告知PV</strong><span>1分ほど。まずこれを観れば雰囲気が分かります。<a href="https://www.youtube.com/watch?v=QyzUM0Aoz3k" target="_blank" rel="noopener">YouTubeで見る ↗</a></span></div></li>
+<li><b>2</b><div><strong>TVアニメ「BanG Dream! Ave Mujica」全13話</strong><span>2025年1月から3月に放送されたシリーズ。劇場版はこの続きなので、時間があるならこれが本命です。<a href="https://www.youtube.com/watch?v=4okQqU25lcs" target="_blank" rel="noopener">本PVを見る ↗</a></span></div></li>
+<li><b>3</b><div><strong>TVアニメ「BanG Dream! It&#39;s MyGO!!!!!」</strong><span>Ave Mujica の1つ前の話。人物の関係はここから始まっているので、余裕があれば。</span></div></li>
+</ol>
+<h3>バンドの5人</h3>
+<table class="cast">
+<tr><td>豊川 祥子</td><td>オブリビオニス</td><td>高尾 奏音</td></tr>
+<tr><td>三角 初華</td><td>ドロリス</td><td>佐々木 李子</td></tr>
+<tr><td>若葉 睦</td><td>モーティス</td><td>渡瀬 結月</td></tr>
+<tr><td>八幡 海鈴</td><td>ティモリス</td><td>岡田 夢以</td></tr>
+<tr><td>祐天寺 にゃむ</td><td>アモーリス</td><td>米澤 茜</td></tr>
+</table>
+<p style="font-size:14px">監督は柿本広大、音楽は藤田淳平（Elements Garden）、アニメーション制作はニチカライン。<a href="https://avemujica-movie.bang-dream.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">公式サイト ↗</a></p>
+</div></div>
+
+<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>コースは3択</b> <span>カードを押すと、当日の流れ・地図・店が出ます。</span></div></div>
 <div class="menu">{''.join(card(c) for c in COURSES)}</div>
 {''.join(detail(c) for c in COURSES)}
 
-<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>決め方</b> <span>返事はエリア名だけで大丈夫です。</span></div></div>
+<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>決め方</b> <span>返事はエリア名だけで大丈夫です。</span></div></div>
 <div class="tail" style="border:none;padding-top:0">
 <p><b>品川・川崎・横浜のどれか</b>を返してください。店は当日その場で決めても大丈夫です。</p>
 <p>10/23の上映時刻は、どの劇場もまだ出していません。だいたい1週間前、<b>10月17日ごろ</b>に出るので、出たらユウキが10時台の回を押さえて、時刻と座席をあらためて連絡します。</p>
 <p>営業時間と定休日は変わることがあるので、当日の朝にリンクから確認します。</p>
-<p class="cred">10/23（金）10:00〜13:00は「いつなら？」で確定した枠です。店の写真は料理のイメージです。<br>写真は Wikimedia Commons（CC BY / CC BY-SA / CC0）: {credits}</p>
+<p class="cred">10/23（金）10:00〜13:00は「いつなら？」で確定した枠です。店の写真は料理のイメージです。<br>作品のビジュアルとあらすじは劇場版 Ave Mujica 公式サイトより。<br>エリアと料理の写真は Wikimedia Commons（CC BY / CC BY-SA / CC0）: {credits}</p>
 </div>
 </div>
 
 <script>
 (function(){{
- var sl=[].slice.call(document.querySelectorAll('.slides img')),dots=[].slice.call(document.querySelectorAll('.dots button')),lab=document.querySelector('.slabel'),i=0,t;
- function show(n){{i=n;sl.forEach(function(x,k){{x.classList.toggle('on',k===n)}});dots.forEach(function(x,k){{x.classList.toggle('on',k===n)}});
-  lab.textContent=sl[n].dataset.name;lab.dataset.course=sl[n].dataset.course}}
- function go(){{clearInterval(t);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(function(){{show((i+1)%sl.length)}},4200)}}
+ var sl=[].slice.call(document.querySelectorAll('.slides img')),dots=[].slice.call(document.querySelectorAll('.dots button')),i=0,t;
+ function show(n){{i=n;sl.forEach(function(x,k){{x.classList.toggle('on',k===n)}});dots.forEach(function(x,k){{x.classList.toggle('on',k===n)}})}}
+ function go(){{clearInterval(t);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(function(){{show((i+1)%sl.length)}},4600)}}
  dots.forEach(function(d,k){{d.addEventListener('click',function(){{show(k);go()}})}});
- lab.addEventListener('click',function(){{document.querySelector('.mcard[data-course="'+lab.dataset.course+'"]').click()}});
  show(0);go();
 }})();
 (function(){{
