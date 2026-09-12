@@ -52,20 +52,20 @@ COURSES = [
   links=[('チネチッタ', 'https://cinecitta.co.jp/'), ('ラ チッタデッラ', 'https://lacittadella.co.jp/')]),
 
  dict(id='C', area='横浜', kicker='COURSE C', name='横浜', place='横浜ブルク13',
-  tag='駅前のビルの11階。店は向かいの崎陽軒本店', card=img('skybldg'),
-  chips=['横浜駅から徒歩3分', '地下街で直結', '崎陽軒の本店'],
-  why='横浜駅の東口、横浜スカイビルの中にある劇場です。観たあとは向かいの崎陽軒本店へ。地下街のポルタで繋がっているので、外を歩かずに行けます。',
+  tag='桜木町駅前のビルの6階。ランチはJRで1駅の崎陽軒本店', card=img('skybldg'),
+  chips=['桜木町駅から徒歩1分', 'みなとみらいの入口', '崎陽軒の本店'],
+  why='桜木町駅の目の前、コレットマーレの6階にある劇場です。観たあとはJRで1駅の横浜駅へ移動して、東口の崎陽軒本店でランチ。駅から店までは歩いて3分です。',
   photos=[img('kiyoken'), img('seabass')],
-  steps=[('10:00', '横浜ブルク13に集合', '横浜駅の東口から歩いて3分。横浜スカイビルの11階です。'),
+  steps=[('10:00', '桜木町駅の改札前に集合', 'JR桜木町駅の改札を出たところ。劇場はコレットマーレの6階で、駅から歩いて1分です。'),
          ('10:20', '上映開始', '回の時刻が出たら確定します。'),
-         ('12:40', '終映、地下へ降りる', 'ポルタの地下街を通って崎陽軒本店へ。'),
+         ('12:40', '終映、桜木町駅へ', 'JRで横浜駅まで1駅3分。東口に出て崎陽軒本店へ歩いて3分。'),
          ('13:00', 'ランチ', '下の2軒から選びます。')],
-  moves='横浜駅 東口 → 劇場 徒歩3分。劇場 → 崎陽軒本店 徒歩3分（地下街で繋がっています）。',
-  stops=['横浜駅', '横浜ブルク13', '崎陽軒本店'],
+  moves='桜木町駅 → 劇場 徒歩1分。劇場 → 桜木町駅 → JRで1駅（3分）→ 横浜駅 東口 → 崎陽軒本店 徒歩3分。',
+  stops=['桜木町駅', '横浜ブルク13', '崎陽軒本店'],
   eats=[('崎陽軒本店 嘉宮', '横浜駅東口 · 中国料理', '崎陽軒の本店の中の中国料理。壺で出てくる料理とランチのコースがあります。', '崎陽軒本店 嘉宮', img('shumai')),
         ('崎陽軒本店 イル・サッジオ', '横浜駅東口 · イタリアン', '同じ本店の中のイタリアン。ナポリの郷土料理をやっている店なので、中華の気分じゃない日はこちら。', '崎陽軒本店 イルサッジオ', img('pizza'))],
   good='そのあと横浜で遊びたい日。みなとみらいも中華街も電車ですぐです。',
-  mind='スカイビルは入口が分かりにくいので、集合はビルの1階のエレベーター前にします。',
+  mind='コレットマーレは桜木町駅の東口（みなとみらい側）を出て正面。ムビチケの発券は6階の発券機でユウキがまとめてやります。',
   links=[('横浜ブルク13', 'https://www.kinezo.jp/burg13/'), ('崎陽軒本店', 'https://kiyoken.com/'),]),
 ]
 
@@ -168,11 +168,12 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .mopen{{align-self:flex-start;display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
 .mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
 .detail{{scroll-margin-top:12px;display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:14px;position:relative}}
-.detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}} .detail.decided{{--arrow:16.67%}}
+.detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}} .detail.decided{{margin-top:0}} .detail.decided::before,.detail.decided .dclose{{display:none}}
 .dwrap{{overflow:hidden;min-height:0;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);position:relative}}
 .detail::before{{content:'';position:absolute;top:-11px;left:var(--arrow,50%);width:20px;height:20px;margin-left:-10px;background:var(--acc);border-left:2px solid var(--acc);border-top:2px solid var(--acc);transform:rotate(45deg);z-index:2;opacity:0;transition:opacity .2s .12s}}
 .detail.open::before{{opacity:1}}
 .dtop{{height:5px;background:var(--acc)}}
+.tix{{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}} .tx{{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--acc);border-radius:var(--r);padding:22px 20px 18px;display:flex;flex-direction:column}} .tx p{{margin:0}} .tx .kicker{{margin-bottom:8px}} .tx .big{{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:12px}} .tx .big span{{font-size:15px;font-weight:600;color:var(--mute);margin-left:6px}} .tx>p:nth-of-type(3){{font-size:14.5px;color:#3d3a34;flex:1}} .tx .due{{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}} .tx .due b{{color:var(--acc)}} .txnote{{margin:16px 0 0;font-size:14px;color:var(--mute)}}
 .detail.open .dwrap{{overflow:visible}}
 .dwrap>*{{margin-left:26px;margin-right:26px}} .dwrap>.dtop{{margin:0}}
 .dhead{{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:26px}}
@@ -224,7 +225,7 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .cred[open] summary::after{{content:"▴"}}
 .cred summary:hover{{color:var(--ink)}}
 .cred p{{font-size:11px;color:#a49d90;line-height:1.7;margin:8px 0 0;max-width:820px}}
-@media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .detail.decided{{--arrow:50%}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
+@media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .tix{{grid-template-columns:1fr}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
 </style></head><body>
 <header class="hero"><div class="hpic"><div class="slides">{slides}</div>
 <div class="wrap hcap"><p class="kicker">FRI, OCT 23 · 10:00</p>
@@ -256,15 +257,20 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 <p style="font-size:14px">監督は柿本広大、音楽は藤田淳平（Elements Garden）、アニメーション制作はニチカライン。<a href="https://avemujica-movie.bang-dream.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">公式サイト ↗</a></p>
 </div></div>
 
-<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>当日のコース</b> <span>横浜で確定。当日の流れ・地図・店はこちら。</span></div></div>
-<div class="menu picked">{''.join(card(c) for c in COURSES if c['id'] == DECIDED)}</div>
+<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>当日のコース</b> <span>横浜で確定。集合から店までの流れ。</span></div></div>
 {''.join(detail(c) for c in COURSES if c['id'] == DECIDED)}
 
-<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>これから</b> <span>あとはユウキが押さえます。</span></div></div>
+<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>チケット</b> <span>ユウキが2枚まとめて押さえます。矢貫さんは手ぶらで大丈夫。</span></div></div>
+<div class="tix">
+<div class="tx"><p class="kicker">前売券</p><p class="big">ムビチケカード <span>1,700円</span></p><p>8/15から販売中。全国の上映館の窓口、MOVIE WALKER STORE、アニメイトで買えます。当日券より300円ほど安く、座席指定にそのまま使えます。</p><p class="due">公開前日 <b>10/15（木）</b>までに2枚</p></div>
+<div class="tx"><p class="kicker">予約開始</p><p class="big">10/21（水）<span>昼ごろ</span></p><p>横浜ブルク13は毎週水曜の昼に、金曜からの1週間分の時刻を出します。予約はKINEZOで、規定は鑑賞日の2日前の0時から。出たらすぐ午前の回を押さえます。</p><p class="due">時刻と座席は<b>10/21に連絡</b></p></div>
+<div class="tx"><p class="kicker">上映回のめど</p><p class="big">9〜10時台 <span>の回</span></p><p>10/23は公開2週目の金曜。同じ劇場でいま上映中のアニメ映画は朝8:40〜9:30始まりの回があるので、10時集合に合う回が出る見込みです。本編の長さはまだ発表されていません。</p><p class="due">集合は<b>10:00 桜木町駅の改札前</b></p></div>
+</div>
+<p class="txnote">ムビチケは番号をKINEZOに入れるだけで座席が取れるので、当日は劇場の発券機でチケットを出して入ります。半券は記念にどうぞ。</p>
+
+<div class="sechead" style="margin-top:36px"><span class="n">4</span><div><b>これから</b> <span>あとはユウキが動きます。</span></div></div>
 <div class="tail" style="border:none;padding-top:0">
 <p><b>エリアは横浜で確定。</b>店は崎陽軒本店の2軒（中国料理か、イタリアン）から、当日その場で決めても大丈夫です。</p>
-<p>10/23の上映時刻はまだ出ていません。横浜ブルク13は毎週水曜の昼ごろに金曜からの1週間分を出すので、<b>10月21日（水）の昼ごろ</b>に決まります。予約もその時から（規定は鑑賞日の2日前0時）。出たらユウキが午前の回を押さえて、時刻と座席をあらためて連絡します。同じ劇場でいま上映中のアニメ映画は朝8時40分〜9時30分始まりの回があるので、10/23も9〜10時台の回が濃厚です。</p>
-<p>チケットはムビチケカード（前売券・1,700円）を2枚、ユウキが用意しておきます。8/15から全国の上映館とMOVIE WALKER STORE、アニメイトで販売中で、通例どおり公開前日の<b>10/15（木）まで</b>買えます。当日券より300円ほど安く、KINEZOで座席指定にそのまま使えます。</p>
 <p>営業時間と定休日は変わることがあるので、当日の朝にリンクから確認します。</p>
 </div>
 
