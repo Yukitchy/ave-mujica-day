@@ -15,6 +15,7 @@ def route_link(stops):
     return ('https://www.google.com/maps/dir/?api=1&origin=' + s[0] + '&destination=' + s[-1]
             + ('&waypoints=' + '%7C'.join(s[1:-1]) if len(s) > 2 else '') + '&travelmode=transit')
 
+DECIDED = 'C'  # 矢貫さんが横浜を選択（2026-09-12 LINE）。None にすると3択ページに戻る
 COURSES = [
  dict(id='A', area='品川', kicker='COURSE A', name='品川', place='T・ジョイPRINCE品川',
   tag='駅から3分。劇場も店もホテルの敷地で完結', card=img('cinema_shinagawa'),
@@ -70,10 +71,11 @@ COURSES = [
 
 def card(c):
     ch = ''.join('<li>' + html.escape(t) + '</li>' for t in c['chips'])
-    return f'''<button class="mcard" type="button" data-course="{c['id']}" aria-expanded="false" aria-controls="detail-{c['id']}">
+    on = c['id'] == DECIDED
+    return f'''<button class="mcard" type="button" data-course="{c['id']}" aria-expanded="{'true' if on else 'false'}" aria-controls="detail-{c['id']}">
 <img src="{c['card']}" alt="{html.escape(c['place'])}" loading="lazy">
 <span class="mb"><span class="mk">{c['kicker']}</span><span class="mt">{html.escape(c['name'])}<small class="mpl"> {html.escape(c['place'])}</small></span>
-<span class="mtag">{html.escape(c['tag'])}</span><ul class="mch">{ch}</ul><span class="mopen">コースを見る</span></span></button>'''
+<span class="mtag">{html.escape(c['tag'])}</span><ul class="mch">{ch}</ul><span class="mopen">{'このコースに決定' if on else 'コースを見る'}</span></span></button>'''
 
 def detail(c):
     ph = ''.join(f'<img src="{u}" alt="{html.escape(c["name"])}コースの写真" loading="lazy">' for u in c['photos'])
@@ -84,7 +86,7 @@ def detail(c):
                  f'<i>Googleマップで開く ↗</i></span></a>'
                  for n, a, d, q, im in c['eats'])
     ln = ' '.join(f'<a href="{u}" target="_blank" rel="noopener">{html.escape(t)} ↗</a>' for t, u in c['links'])
-    return f'''<section class="detail" id="detail-{c['id']}" hidden><div class="dwrap"><div class="dtop"></div>
+    return f'''<section class="detail{' open decided' if c['id'] == DECIDED else ''}" id="detail-{c['id']}"{'' if c['id'] == DECIDED else ' hidden'}><div class="dwrap"><div class="dtop"></div>
 <div class="dhead"><div><p class="kicker">{c['kicker']} · {html.escape(c['area'])}</p><h2><span class="nb">{html.escape(c['place'])}</span></h2></div>
 <button class="dclose" type="button" aria-label="閉じる">CLOSE ✕</button></div>
 <p class="why">{html.escape(c['why'])}</p>
@@ -108,9 +110,9 @@ dots = ''.join('<button type="button" aria-label="ビジュアル' + str(i + 1) 
 credits = ' / '.join(sorted(set(html.escape(v['title'].rsplit('.', 1)[0]) for v in PH.values())))
 
 page = f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>10/23 Ave Mujica｜品川・川崎・横浜の3コース</title><meta name="robots" content="noindex">
+<title>10/23 Ave Mujica｜横浜コースに決定</title><meta name="robots" content="noindex">
 <meta property="og:title" content="10/23（金）Ave Mujica を観て、そのままランチ。">
-<meta property="og:description" content="品川・川崎・横浜の3コース。劇場と観たあとの店をセットにしてあります。行きたいエリアを1つ選んでください。">
+<meta property="og:description" content="横浜コースに決まりました。横浜ブルク13で観て、崎陽軒本店でランチ。上映時刻が出たら時刻と座席を連絡します。">
 <meta property="og:image" content="https://yukitchy.github.io/ave-mujica-day/ogp.png?v=2">
 <meta property="og:url" content="https://yukitchy.github.io/ave-mujica-day/">
 <meta name="twitter:card" content="summary_large_image">
@@ -166,7 +168,7 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .mopen{{align-self:flex-start;display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
 .mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
 .detail{{scroll-margin-top:12px;display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:14px;position:relative}}
-.detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}}
+.detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}} .detail.decided{{--arrow:16.67%}}
 .dwrap{{overflow:hidden;min-height:0;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);position:relative}}
 .detail::before{{content:'';position:absolute;top:-11px;left:var(--arrow,50%);width:20px;height:20px;margin-left:-10px;background:var(--acc);border-left:2px solid var(--acc);border-top:2px solid var(--acc);transform:rotate(45deg);z-index:2;opacity:0;transition:opacity .2s .12s}}
 .detail.open::before{{opacity:1}}
@@ -222,15 +224,15 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .cred[open] summary::after{{content:"▴"}}
 .cred summary:hover{{color:var(--ink)}}
 .cred p{{font-size:11px;color:#a49d90;line-height:1.7;margin:8px 0 0;max-width:820px}}
-@media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
+@media(max-width:860px){{ .pre{{grid-template-columns:1fr;gap:20px}} .detail.decided{{--arrow:50%}} .pre>img{{max-width:280px;margin:0 auto}} .menu{{grid-template-columns:1fr}} .dgrid{{grid-template-columns:1fr;gap:22px}} .notes{{grid-template-columns:1fr}} .eats{{grid-template-columns:1fr}} .dwrap>*{{margin-left:18px;margin-right:18px}} }}
 </style></head><body>
 <header class="hero"><div class="hpic"><div class="slides">{slides}</div>
 <div class="wrap hcap"><p class="kicker">FRI, OCT 23 · 10:00</p>
 <h1><span class="nb">Ave Mujica を観て、</span><span class="nb">そのままランチ。</span></h1>
-<p class="esub">SHINAGAWA · KAWASAKI · YOKOHAMA</p>
+<p class="esub">YOKOHAMA · 横浜ブルク13 → 崎陽軒本店</p>
 <div class="snav"><span class="slabel">劇場版 BanG Dream! Ave Mujica prima aurora</span><div class="dots">{dots}</div></div></div></div>
-<div class="wrap hbody"><p>10/23（金）の午前の回で観ます。劇場と、観たあとに歩いて行ける店をセットにして3案作りました。行きたいエリアを1つ選んでください。</p>
-<ul class="facts"><li><b>日にち</b> 10/23（金）</li><li><b>集合</b> 10時台（回が出たら確定）</li><li><b>人数</b> 2人</li><li><b>作品</b> 劇場版 Ave Mujica prima aurora</li></ul></div></header>
+<div class="wrap hbody"><p><b>横浜コースに決まりました。</b>10/23（金）の午前の回を横浜ブルク13で観て、そのまま地下街を通って崎陽軒本店でランチです。</p>
+<ul class="facts"><li><b>日にち</b> 10/23（金）</li><li><b>集合</b> 横浜ブルク13 · 10時台（回が出たら確定）</li><li><b>人数</b> 2人</li><li><b>作品</b> 劇場版 Ave Mujica prima aurora</li></ul></div></header>
 
 <div class="wrap">
 <div class="sechead"><span class="n">1</span><div><b>どんな映画か</b> <span>観る前に、これだけ。</span></div></div>
@@ -254,13 +256,13 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 <p style="font-size:14px">監督は柿本広大、音楽は藤田淳平（Elements Garden）、アニメーション制作はニチカライン。<a href="https://avemujica-movie.bang-dream.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">公式サイト ↗</a></p>
 </div></div>
 
-<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>コースは3択</b> <span>カードを押すと、当日の流れ・地図・店が出ます。</span></div></div>
-<div class="menu">{''.join(card(c) for c in COURSES)}</div>
-{''.join(detail(c) for c in COURSES)}
+<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>当日のコース</b> <span>横浜で確定。当日の流れ・地図・店はこちら。</span></div></div>
+<div class="menu picked">{''.join(card(c) for c in COURSES if c['id'] == DECIDED)}</div>
+{''.join(detail(c) for c in COURSES if c['id'] == DECIDED)}
 
-<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>決め方</b> <span>返事はエリア名だけで大丈夫です。</span></div></div>
+<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>これから</b> <span>あとはユウキが押さえます。</span></div></div>
 <div class="tail" style="border:none;padding-top:0">
-<p><b>品川・川崎・横浜のどれか</b>を返してください。店は当日その場で決めても大丈夫です。</p>
+<p><b>エリアは横浜で確定。</b>店は崎陽軒本店の2軒（中国料理か、イタリアン）から、当日その場で決めても大丈夫です。</p>
 <p>10/23の上映時刻は、どの劇場もまだ出していません。だいたい1週間前、<b>10月17日ごろ</b>に出るので、出たらユウキが10時台の回を押さえて、時刻と座席をあらためて連絡します。</p>
 <p>営業時間と定休日は変わることがあるので、当日の朝にリンクから確認します。</p>
 </div>
