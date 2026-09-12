@@ -236,7 +236,18 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 <ul class="facts"><li><b>日にち</b> 10/23（金）</li><li><b>集合</b> 横浜ブルク13 · 10時台（回が出たら確定）</li><li><b>人数</b> 2人</li><li><b>作品</b> 劇場版 Ave Mujica prima aurora</li></ul></div></header>
 
 <div class="wrap">
-<div class="sechead"><span class="n">1</span><div><b>どんな映画か</b> <span>観る前に、これだけ。</span></div></div>
+<div class="sechead"><span class="n">1</span><div><b>チケット</b> <span>ユウキが2枚まとめて押さえます。矢貫さんは手ぶらで大丈夫。</span></div></div>
+<div class="tix">
+<div class="tx"><p class="kicker">前売券</p><p class="big">ムビチケカード <span>1,700円</span></p><p>8/15から販売中。全国の上映館の窓口、MOVIE WALKER STORE、アニメイトで買えます。当日券より300円ほど安く、座席指定にそのまま使えます。</p><p class="due">公開前日 <b>10/15（木）</b>までに2枚</p></div>
+<div class="tx"><p class="kicker">予約開始</p><p class="big">10/21（水）<span>昼ごろ</span></p><p>横浜ブルク13は毎週水曜の昼に、金曜からの1週間分の時刻を出します。予約はKINEZOで、規定は鑑賞日の2日前の0時から。出たらすぐ午前の回を押さえます。</p><p class="due">時刻と座席は<b>10/21に連絡</b></p></div>
+<div class="tx"><p class="kicker">上映回のめど</p><p class="big">9〜10時台 <span>の回</span></p><p>10/23は公開2週目の金曜。同じ劇場でいま上映中のアニメ映画は朝8:40〜9:30始まりの回があるので、10時集合に合う回が出る見込みです。本編の長さはまだ発表されていません。</p><p class="due">集合は<b>10:00 桜木町駅の改札前</b></p></div>
+</div>
+<p class="txnote">ムビチケは番号をKINEZOに入れるだけで座席が取れるので、当日は劇場の発券機でチケットを出して入ります。半券は記念にどうぞ。</p>
+
+<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>当日のコース</b> <span>横浜で確定。集合から店までの流れ。</span></div></div>
+{''.join(detail(c) for c in COURSES if c['id'] == DECIDED)}
+
+<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>どんな映画か</b> <span>観る前に、これだけ。</span></div></div>
 <div class="pre">
 <img src="img/img_kv_01.webp" alt="劇場版 Ave Mujica のティザービジュアル" loading="lazy">
 <div>
@@ -256,17 +267,6 @@ header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 </table>
 <p style="font-size:14px">監督は柿本広大、音楽は藤田淳平（Elements Garden）、アニメーション制作はニチカライン。<a href="https://avemujica-movie.bang-dream.com/" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;text-underline-offset:3px">公式サイト ↗</a></p>
 </div></div>
-
-<div class="sechead" style="margin-top:36px"><span class="n">2</span><div><b>当日のコース</b> <span>横浜で確定。集合から店までの流れ。</span></div></div>
-{''.join(detail(c) for c in COURSES if c['id'] == DECIDED)}
-
-<div class="sechead" style="margin-top:36px"><span class="n">3</span><div><b>チケット</b> <span>ユウキが2枚まとめて押さえます。矢貫さんは手ぶらで大丈夫。</span></div></div>
-<div class="tix">
-<div class="tx"><p class="kicker">前売券</p><p class="big">ムビチケカード <span>1,700円</span></p><p>8/15から販売中。全国の上映館の窓口、MOVIE WALKER STORE、アニメイトで買えます。当日券より300円ほど安く、座席指定にそのまま使えます。</p><p class="due">公開前日 <b>10/15（木）</b>までに2枚</p></div>
-<div class="tx"><p class="kicker">予約開始</p><p class="big">10/21（水）<span>昼ごろ</span></p><p>横浜ブルク13は毎週水曜の昼に、金曜からの1週間分の時刻を出します。予約はKINEZOで、規定は鑑賞日の2日前の0時から。出たらすぐ午前の回を押さえます。</p><p class="due">時刻と座席は<b>10/21に連絡</b></p></div>
-<div class="tx"><p class="kicker">上映回のめど</p><p class="big">9〜10時台 <span>の回</span></p><p>10/23は公開2週目の金曜。同じ劇場でいま上映中のアニメ映画は朝8:40〜9:30始まりの回があるので、10時集合に合う回が出る見込みです。本編の長さはまだ発表されていません。</p><p class="due">集合は<b>10:00 桜木町駅の改札前</b></p></div>
-</div>
-<p class="txnote">ムビチケは番号をKINEZOに入れるだけで座席が取れるので、当日は劇場の発券機でチケットを出して入ります。半券は記念にどうぞ。</p>
 
 <div class="sechead" style="margin-top:36px"><span class="n">4</span><div><b>これから</b> <span>あとはユウキが動きます。</span></div></div>
 <div class="tail" style="border:none;padding-top:0">
